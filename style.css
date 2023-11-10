@@ -14,26 +14,6 @@ header {
     text-align: center;
 }
 
-/* Navigation Styles */
-nav {
-    background: #555;
-    display: block;
-    text-align: center;
-    padding: 10px 0;
-}
-nav ul {
-    padding: 0;
-    list-style: none;
-}
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-}
-
 /* Section Styles */
 section {
     padding: 20px;
