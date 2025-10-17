@@ -1,87 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-    section {
-        margin: 0;
-    }
-    h2 {
-        margin-top: 10;
-    }
-    #about, #education, #resume, #linkedin, #contact {
-        margin-bottom: 0;
-    }
-    </style>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Eduardo Perez Rocha - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eduardo Perez Rocha</title>
+  <meta name="description" content="Minimal, single-page site in the style of tinygrad.org" />
+  <style>
+    :root {
+      --maxw: 760px;
+      --fg: #111;
+      --bg: #fff;
+      --muted: #cfcfcf;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--fg);
+      background: var(--bg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.55;
+      font-size: 16px;
+    }
+    a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { text-decoration-thickness: 2px; }
+
+    /* Top nav emulates tinygrad.org: left-aligned links separated by pipes */
+    .nav {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 14px 18px;
+      font-size: 15px;
+      white-space: nowrap;
+    }
+    .nav a { text-decoration: none; }
+    .nav a:hover { text-decoration: underline; }
+    .nav .sep { opacity: .6; padding: 0 6px; }
+
+    main { max-width: var(--maxw); margin: 0 auto; padding: 0 18px 64px; }
+
+    hr { border: 0; border-top: 1px solid var(--muted); margin: 18px 0; }
+
+    h1, h2, h3 { font-weight: 650; line-height: 1.2; margin: 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; margin-top: 4px; }
+    h3 { font-size: 18px; margin-top: 0; }
+
+    p { margin: 8px 0 0 0; }
+    ul { margin: 8px 0 0 18px; }
+    li { margin: 4px 0; }
+
+    .kicker { font-size: 14px; opacity: .75; margin-top: 6px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px 20px;
+    }
+    @media (min-width: 720px) {
+      .grid.two { grid-template-columns: 1fr 1fr; }
+    }
+
+    .muted { opacity: .8; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    /* Compact definition-list style like the tinybox spec table */
+    .specs { display: grid; grid-template-columns: 1fr 2fr; gap: 6px 12px; margin-top: 10px; }
+    .specs div { padding: 0; }
+    .specs .k { opacity: .8; }
+
+    footer { max-width: var(--maxw); margin: 0 auto; padding: 16px 18px 40px; color: #555; font-size: 13px; }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Eduardo Perez Rocha</h1>
-        <img> 
-        <p>My personal website</p>
-    </header>
-    <section id="about">
-        <h2>SKILLS</h2>
-        <p>
-            <a>Github:</a>
-            <a href="https://github.com/eduperezrocha">eduperezrocha</a>
-        </p>
-        <p>Programming: Python, Java, C, Git, Linux, Ubuntu </p>
-        <p> Oral and written proficiency in: Spanish (Native Level); Korean – CEFR B1. </p>
+  <!-- Top navigation -->
+  <nav class="nav" aria-label="Primary">
+    <a href="#top"><strong>Eduardo</strong></a>
+    <span class="sep">|</span>
+    <a href="#projects">Projects</a>
+    <span class="sep">|</span>
+    <a href="#resume">Resume</a>
+    <span class="sep">|</span>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main id="top">
+    <hr />
+    <section aria-labelledby="title">
+      <h1 id="title">Eduardo Perez Rocha</h1>
+      <p class="kicker">CS @ University of San Diego · Backend & Frontend Dev</p>
     </section>
-    <section id = "Projects">
-        <h2>Projects</h2>
-        <BODY>
-            <IMG SRC="GameOfLife.png" width="350">
-        </BODY>
-        <p>
-            <b>Wild Life Simulation: </b>This project is inspired on game of life which does not require any input.
-            The difference is that instead of evolution there are interactions
-            between different types of entities.
-            <p>
-                <b>Design</b> The design of this project is Objected Oriented, meaning that 
-                for persons and animals there is an Abstract Class and for specific types of persons or animals the concrete 
-                class inherits from the abstract method.
-            </p>
-            <p>
-                <b>Implementation</b> What I implemented in this project is the simulation and tests of the 
-                projects.The simulation logic which includes handling
-                all interactions between entities and resources in the world.
-            </p>
-        </p>
-        
+
+    <hr />
+    <section id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <p>I grew up in Aguascalientes, Mexico, and moved to the U.S. to pursue a B.S. in Computer Science. I enjoy building clean backends, pragmatic frontends, and learning the math behind ML.</p>
     </section>
-    <section id="education">
-        <h2>Education</h2>
-        <p>University of San Diego - Computer Science - Expected Graduation May 2025</p>
+
+    <hr />
+    <section id="skills" aria-labelledby="skills-h">
+      <h2 id="skills-h">Skills</h2>
+      <ul>
+        <li><strong>Languages:</strong> Python, Java, C</li>
+        <li><strong>Web/Tools:</strong> REST APIs, PostgreSQL/MySQL, Git, Linux (Ubuntu), React</li>
+        <li><strong>Links:</strong> <a href="https://github.com/eduperezrocha" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/eduardopzrocha/" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
     </section>
-    <section id="resume">
-        <h2>Resume</h2>
-        <a href="https://github.com/eduperezrocha/eduperezrocha.github.io/blob/main/RESUME.pdf?raw=true" target="_blank">View PDF</a>
+
+    <hr />
+    <section id="projects" aria-labelledby="projects-h">
+      <h2 id="projects-h">Projects</h2>
+      <div class="grid">
+        <div>
+          <h3>Rhea Skate Co. — Backend</h3>
+          <p>Java Spring Boot + PostgreSQL REST API for orders, inventory, and auth. Built automated tests and CI.</p>
+          <p class="kicker"><a href="https://github.com/eduperezrocha" target="_blank" rel="noopener">code</a></p>
+        </div>
+        <div>
+          <h3>Santa Homes — Web App</h3>
+          <p>React 18 + Vite + MUI storefront with product grid, quick‑view dialogs, and cart modals. Exploring FedEx shipping integration.</p>
+          <p class="kicker"><a href="https://github.com/eduperezrocha" target="_blank" rel="noopener">code</a></p>
+        </div>
+        <div>
+          <h3>OURSearch — University Research Portal</h3>
+          <p>Contributed React components (Admin/Student/Faculty), email notifications, and UX refinements.</p>
+          <p class="kicker"><a href="https://github.com/eduperezrocha" target="_blank" rel="noopener">code</a></p>
+        </div>
+      </div>
     </section>
-    <section id="linkedin">
-        <h2>LinkedIn</h2>
-        <p>
-            Find me on linkedin at:
-            <a href="https://www.linkedin.com/in/eduardopzrocha/">eduardopzrocha</a>
-        </p>
+
+    <hr />
+    <section id="education" aria-labelledby="edu-h">
+      <h2 id="edu-h">Education</h2>
+      <p><strong>University of San Diego</strong> — B.S. in Computer Science (expected Dec 2025)</p>
     </section>
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>
-            Email me at:
-            <a href="mailto:eduardopzrocha@gmail.com">edurdopzrocha@gmail.com</a>
-        </p>
+
+    <hr />
+    <section id="resume" aria-labelledby="resume-h">
+      <h2 id="resume-h">Resume</h2>
+      <p><a href="https://github.com/eduperezrocha/eduperezrocha.github.io/blob/main/RESUME.pdf?raw=true" target="_blank" rel="noopener">View PDF</a></p>
     </section>
-    <section>
-        <h2>About me</h2>
-        <p>
-            I grew up in Aguascalientes, Mexico until high school.
-            Then I moved to US to persue a Computer Science degree.
-        </p>
+
+    <hr />
+    <section id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <p>Email: <a href="mailto:eduardopzrocha@gmail.com">eduardopzrocha@gmail.com</a></p>
+      <p>Also on <a href="https://www.linkedin.com/in/eduardopzrocha/" target="_blank" rel="noopener">LinkedIn</a> and <a href="https://github.com/eduperezrocha" target="_blank" rel="noopener">GitHub</a>.</p>
     </section>
+  </main>
+
+
+  <script>
+    // tiny, non-blocking nicety
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
