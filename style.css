@@ -50,6 +50,61 @@ footer {
     width: 100%;
 }
 
+body {
+  overflow-x: hidden;
+}
+
+.nav,
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Background bubble layer */
+body {
+  overflow-x: hidden;
+}
+
+.nav,
+main,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+#ball-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bouncing-ball {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.55),
+    rgba(0, 0, 0, 0.08) 45%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  filter: blur(0.2px);
+  opacity: 0.55;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ball-layer {
+    display: none;
+  }
+}
+
 /* Media Queries for Responsive Design */
 @media only screen and (max-width: 600px) {
     nav ul li {
