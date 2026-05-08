@@ -11,13 +11,15 @@
       --fg: #111;
       --bg: #fff;
       --muted: #cfcfcf;
+      --ball: #6aa9ff;
     }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
+    html { background: var(--bg); }
     body {
       margin: 0;
       color: var(--fg);
-      background: var(--bg);
+      background: transparent;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       line-height: 1.55;
       font-size: 16px;
@@ -32,12 +34,20 @@
       padding: 14px 18px;
       font-size: 15px;
       white-space: nowrap;
+      position: relative;
+      z-index: 2;
     }
     .nav a { text-decoration: none; }
     .nav a:hover { text-decoration: underline; }
     .nav .sep { opacity: .6; padding: 0 6px; }
 
-    main { max-width: var(--maxw); margin: 0 auto; padding: 0 18px 64px; }
+    main {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 18px 64px;
+      position: relative;
+      z-index: 2;
+    }
 
     hr { border: 0; border-top: 1px solid var(--muted); margin: 18px 0; }
 
@@ -55,7 +65,7 @@
     .grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 10px 20px;
+      gap: 18px 20px;
     }
     @media (min-width: 720px) {
       .grid.two { grid-template-columns: 1fr 1fr; }
@@ -64,18 +74,46 @@
     .muted { opacity: .8; }
     .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
-    /* Compact definition-list style like the tinybox spec table */
-    .specs { display: grid; grid-template-columns: 1fr 2fr; gap: 6px 12px; margin-top: 10px; }
-    .specs div { padding: 0; }
-    .specs .k { opacity: .8; }
+    footer {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 16px 18px 40px;
+      color: #555;
+      font-size: 13px;
+      position: relative;
+      z-index: 2;
+    }
 
-    footer { max-width: var(--maxw); margin: 0 auto; padding: 16px 18px 40px; color: #555; font-size: 13px; }
+    /* Bouncing-ball overlay */
+    #ball-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .bouncing-ball {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 30%, #cfe1ff 0%, var(--ball) 55%, #3b78d6 100%);
+      opacity: 0.55;
+      mix-blend-mode: multiply;
+      will-change: transform;
+      transform-origin: center center;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #ball-layer { display: none; }
+    }
   </style>
 </head>
 <body>
   <!-- Top navigation -->
   <nav class="nav" aria-label="Primary">
-
     <a href="#projects">Projects</a>
     <span class="sep">|</span>
     <a href="RESUME.pdf" target="_blank" rel="noopener">Resume</a>
@@ -87,7 +125,7 @@
     <hr />
     <section aria-labelledby="title">
       <h1 id="title">Eduardo Perez Rocha</h1>
-      <p class="kicker">CS @ University of San Diego · Backend & Frontend Dev</p>
+      <p class="kicker">CS @ University of San Diego · Backend &amp; Frontend Dev</p>
     </section>
 
     <hr />
@@ -103,7 +141,7 @@
       <h2 id="skills-h">Skills</h2>
       <ul>
         <li><strong>Computer Languages:</strong> Python, Java, C</li>
-        <li><strong>Human Languages:</strong> Spanish (Fluent), English (C2), Korean(B1)</li>
+        <li><strong>Human Languages:</strong> Spanish (Fluent), English (C2), Korean (B1)</li>
         <li><strong>Web/Tools:</strong> REST APIs, PostgreSQL/MySQL, Git, Linux (Ubuntu), React</li>
         <li><strong>Links:</strong> <a href="https://github.com/eduperezrocha" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/eduardopzrocha/" target="_blank" rel="noopener">LinkedIn</a></li>
       </ul>
@@ -118,11 +156,11 @@
           <p>
             Built and deployed a full-stack e-commerce platform using Vendure, PostgreSQL, Docker, and Dokploy, with a Next.js storefront optimized for fast mobile performance. Integrated Mercado Pago payments, order confirmation emails, live multi-carrier shipping quotes, discount management, and CI/CD pipelines through GitHub Actions and Docker Hub.
           </p>
-          <p class="kicker"><a href="dhskateshop.com" target="_blank" rel="noopener">website</a></p>
+          <p class="kicker"><a href="https://dhskateshop.com" target="_blank" rel="noopener">website</a></p>
         </div>
         <div>
           <h3>Santa Homes — Web App</h3>
-          <p>React 18 + Vite + MUI storefront with product grid, quick‑view dialogs, and cart modals. Exploring FedEx shipping integration.</p>
+          <p>React 18 + Vite + MUI storefront with product grid, quick-view dialogs, and cart modals. Exploring FedEx shipping integration.</p>
           <p class="kicker"><a href="https://github.com/eduperezrocha" target="_blank" rel="noopener">code</a></p>
         </div>
         <div>
@@ -133,136 +171,128 @@
       </div>
     </section>
 
-
-     <hr />
+    <hr />
     <section id="working-on" aria-labelledby="working-on-h">
-      <h2 id="skills-h">Current Personal Projects</h2>
+      <h2 id="working-on-h">Current Personal Projects</h2>
       <ul>
-        <li><strong>Hong Kong Racing</strong> - Python</li>
+        <li><strong>Hong Kong Racing</strong> — Python</li>
       </ul>
     </section>
 
     <hr />
-
     <section id="education" aria-labelledby="edu-h">
       <h2 id="edu-h">Education</h2>
-      <p><strong>University of San Diego (2021-2025)</strong> — Bachelors in Computer Science & minor in Philosophy</p>
-
+      <p><strong>University of San Diego (2021–2025)</strong> — Bachelor's in Computer Science &amp; minor in Philosophy</p>
     </section>
 
+    <hr />
     <section id="contact" aria-labelledby="contact-h">
       <h2 id="contact-h">Contact</h2>
       <p>Email: <a href="mailto:eduardopzrocha@gmail.com">eduardopzrocha@gmail.com</a></p>
       <p>Also on <a href="https://www.linkedin.com/in/eduardopzrocha/" target="_blank" rel="noopener">LinkedIn</a> and <a href="https://github.com/eduperezrocha" target="_blank" rel="noopener">GitHub</a>.</p>
     </section>
   </main>
-    <div id="ball-layer" aria-hidden="true"></div>
 
-    <script>
-      const layer = document.getElementById("ball-layer");
+  <div id="ball-layer" aria-hidden="true"></div>
 
-      const MAX_BALLS = 5;
-      const BALL_SIZE = 90;
+  <script>
+    const layer = document.getElementById("ball-layer");
 
-      const balls = [];
+    const MAX_BALLS = 5;
+    const BALL_SIZE = 90;
 
-      function createBall(x, y, dx, dy) {
-        const el = document.createElement("div");
-        el.className = "bouncing-ball";
-        layer.appendChild(el);
+    const balls = [];
 
-        balls.push({
-          el,
-          x,
-          y,
-          dx,
-          dy,
-          scaleX: 1,
-          scaleY: 1,
-          targetScaleX: 1,
-          targetScaleY: 1,
-          cooldown: 0
-        });
-      }
+    function createBall(x, y, dx, dy) {
+      const el = document.createElement("div");
+      el.className = "bouncing-ball";
+      layer.appendChild(el);
 
-      createBall(300, 50, 0.7, 0.6);
+      balls.push({
+        el,
+        x,
+        y,
+        dx,
+        dy,
+        scaleX: 1,
+        scaleY: 1,
+        targetScaleX: 1,
+        targetScaleY: 1,
+        cooldown: 0
+      });
+    }
 
-      function multiplyBall(ball) {
-        if (balls.length >= MAX_BALLS) return;
+    createBall(300, 50, 0.7, 0.6);
 
-        const angle = Math.random() * Math.PI * 2;
-        const speed = 0.45 + Math.random() * 0.45;
+    function multiplyBall(ball) {
+      if (balls.length >= MAX_BALLS) return;
 
-        createBall(
-          ball.x,
-          ball.y,
-          Math.cos(angle) * speed,
-          Math.sin(angle) * speed
-        );
-      }
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 0.45 + Math.random() * 0.45;
 
-      function animateBalls() {
-        const maxX = window.innerWidth - BALL_SIZE;
-        const maxY = window.innerHeight - BALL_SIZE;
+      createBall(
+        ball.x,
+        ball.y,
+        Math.cos(angle) * speed,
+        Math.sin(angle) * speed
+      );
+    }
 
-        balls.forEach((ball) => {
-          ball.x += ball.dx;
-          ball.y += ball.dy;
+    function animateBalls() {
+      const maxX = window.innerWidth - BALL_SIZE;
+      const maxY = window.innerHeight - BALL_SIZE;
 
-          const hitLeft = ball.x <= 0;
-          const hitRight = ball.x >= maxX;
-          const hitTop = ball.y <= 0;
-          const hitBottom = ball.y >= maxY;
+      balls.forEach((ball) => {
+        ball.x += ball.dx;
+        ball.y += ball.dy;
 
-          const hitHorizontalWall = hitLeft || hitRight;
-          const hitVerticalWall = hitTop || hitBottom;
+        const hitLeft = ball.x <= 0;
+        const hitRight = ball.x >= maxX;
+        const hitTop = ball.y <= 0;
+        const hitBottom = ball.y >= maxY;
 
-          let hitWall = false;
+        const hitHorizontalWall = hitLeft || hitRight;
+        const hitVerticalWall = hitTop || hitBottom;
 
-          if (hitHorizontalWall) {
-            ball.dx *= -1;
-            ball.x = Math.max(0, Math.min(ball.x, maxX));
-            hitWall = true;
+        let hitWall = false;
 
-            // Squish sideways when hitting left/right walls
-            ball.targetScaleX = 0.72;
-            ball.targetScaleY = 1.22;
-          }
+        if (hitHorizontalWall) {
+          ball.dx *= -1;
+          ball.x = Math.max(0, Math.min(ball.x, maxX));
+          hitWall = true;
+          ball.targetScaleX = 0.72;
+          ball.targetScaleY = 1.22;
+        }
 
-          if (hitVerticalWall) {
-            ball.dy *= -1;
-            ball.y = Math.max(0, Math.min(ball.y, maxY));
-            hitWall = true;
+        if (hitVerticalWall) {
+          ball.dy *= -1;
+          ball.y = Math.max(0, Math.min(ball.y, maxY));
+          hitWall = true;
+          ball.targetScaleX = 1.22;
+          ball.targetScaleY = 0.72;
+        }
 
-            // Squish vertically when hitting top/bottom walls
-            ball.targetScaleX = 1.22;
-            ball.targetScaleY = 0.72;
-          }
+        if (hitWall && ball.cooldown <= 0) {
+          multiplyBall(ball);
+          ball.cooldown = 35;
+        }
 
-          if (hitWall && ball.cooldown <= 0) {
-            multiplyBall(ball);
-            ball.cooldown = 35;
-          }
+        if (ball.cooldown > 0) ball.cooldown--;
 
-          if (ball.cooldown > 0) {
-            ball.cooldown--;
-          }
+        ball.scaleX += (ball.targetScaleX - ball.scaleX) * 0.25;
+        ball.scaleY += (ball.targetScaleY - ball.scaleY) * 0.25;
 
-          // Smoothly return to round bubble shape
-          ball.scaleX += (ball.targetScaleX - ball.scaleX) * 0.25;
-          ball.scaleY += (ball.targetScaleY - ball.scaleY) * 0.25;
+        ball.targetScaleX += (1 - ball.targetScaleX) * 0.12;
+        ball.targetScaleY += (1 - ball.targetScaleY) * 0.12;
 
-          ball.targetScaleX += (1 - ball.targetScaleX) * 0.12;
-          ball.targetScaleY += (1 - ball.targetScaleY) * 0.12;
+        ball.el.style.transform =
+          `translate(${ball.x}px, ${ball.y}px) scale(${ball.scaleX}, ${ball.scaleY})`;
+      });
 
-          ball.el.style.transform =
-            `translate(${ball.x}px, ${ball.y}px) scale(${ball.scaleX}, ${ball.scaleY})`;
-        });
+      requestAnimationFrame(animateBalls);
+    }
 
-        requestAnimationFrame(animateBalls);
-      }
-
-      animateBalls();
-    </script>
+    animateBalls();
+  </script>
 </body>
 </html>
